@@ -18,7 +18,7 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              <nuxt-link to="/login">Login</nuxt-link>
+              <nuxt-link to="/userList">userList</nuxt-link>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -32,10 +32,10 @@
 
     <v-main>
       <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-          <v-col class="text-center">
-            <nuxt />
-            <!-- <v-tooltip left>
+        <!-- <v-row align="center" justify="center">
+          <v-col class="text-center"> -->
+        <nuxt />
+        <!-- <v-tooltip left>
               <template v-slot:activator="{ on }">
                 <v-btn :href="source" icon large target="_blank" v-on="on">
                   <v-icon large>mdi-code-tags</v-icon>
@@ -43,8 +43,8 @@
               </template>
               <span>Source</span>
             </v-tooltip> -->
-          </v-col>
-        </v-row>
+        <!-- </v-col>
+        </v-row> -->
       </v-container>
     </v-main>
     <!-- <v-footer color="indigo" app>
