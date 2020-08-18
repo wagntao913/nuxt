@@ -1,7 +1,6 @@
 <template>
   <div>
-    USERLIST PAGE
-    <el-table :data="dataTable" border stripe>
+    <el-table :data="dataTable" border>
       <el-table-column
         v-for="col in columns"
         :key="col.id"
