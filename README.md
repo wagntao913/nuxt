@@ -1,4 +1,4 @@
-# my-first-nuxt
+# nuxt-element-admin
 
 ## Build Setup
 

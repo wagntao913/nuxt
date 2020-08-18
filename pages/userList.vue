@@ -1,25 +1,40 @@
 <template>
   <v-layout column justify-center align-center>
-    <v-data-table :headers="headers" :items="desserts"></v-data-table>
+    <v-data-table :headers="headers" :items="dataList"></v-data-table>
   </v-layout>
 </template>
 
 <script>
 export default {
+  asyncData({
+    app,
+    isDev,
+    route,
+    store,
+    env,
+    params,
+    query,
+    req,
+    res,
+    redirect,
+    error,
+  }) {
+    return app.$axios.$get('users').then((res) => {
+      // eslint-disable-next-line no-console
+      console.log(res)
+      if (res) {
+        return {
+          dataList: res.data,
+        }
+      }
+    })
+  },
   data() {
     return {
       headers: [
-        {
-          text: 'Dessert (100g serving)',
-          align: 'start',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Iron (%)', value: 'iron' },
+        { text: '用户名', value: 'username' },
+        { text: '密码', value: 'password' },
+        { text: '头像', value: 'avatar' },
       ],
       desserts: [
         {

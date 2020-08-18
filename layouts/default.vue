@@ -1,62 +1,115 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list dense>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              <nuxt-link to="/home">Home</nuxt-link>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-email</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              <nuxt-link to="/userList">userList</nuxt-link>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app color="white">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
-    </v-app-bar>
-
-    <v-main>
-      <v-container class="fill-height" fluid>
-        <!-- <v-row align="center" justify="center">
-          <v-col class="text-center"> -->
-        <nuxt />
-        <!-- <v-tooltip left>
-              <template v-slot:activator="{ on }">
-                <v-btn :href="source" icon large target="_blank" v-on="on">
-                  <v-icon large>mdi-code-tags</v-icon>
-                </v-btn>
-              </template>
-              <span>Source</span>
-            </v-tooltip> -->
-        <!-- </v-col>
-        </v-row> -->
-      </v-container>
-    </v-main>
-    <!-- <v-footer color="indigo" app>
-      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer> -->
-  </v-app>
+  <el-container>
+    <el-aside width="200px" style="height: 100vh; background: lightblue;">
+      <!-- Aside content -->
+      <el-menu
+        mode="vertical"
+        style="height: 100vh;"
+        :default-active="$route.path"
+        router
+      >
+        <el-submenu
+          v-for="(item, index) in menu.items"
+          :key="`menu-item-${index}`"
+          :index="index + '1'"
+        >
+          <template slot="title">{{ item.title }}</template>
+          <el-menu-item
+            v-for="(subItem, subIndex) in item.items"
+            :key="`menu-item-${index}-${subIndex}`"
+            :index="subItem.path"
+          >
+            {{ subItem.title }}
+          </el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </el-aside>
+    <el-container>
+      <el-header height="50px" style="background: lightpink;">
+        <!-- Header content -->
+      </el-header>
+      <el-main style="padding：10px 10px;">
+        <!-- Main content -->
+        <Nuxt />
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    drawer: null,
-  }),
+  data() {
+    return {
+      menu: {
+        items: [
+          {
+            title: '内容管理',
+            items: [
+              { title: '首页', path: '/' },
+              { title: '文章管理', path: '/users/usersList' },
+            ],
+          },
+          {
+            title: '运营管理',
+            items: [{ title: '用户管理', path: '/users/usersList' }],
+          },
+        ],
+      },
+    }
+  },
 }
 </script>
+<style>
+html {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  height: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.el-main {
+  padding: 10px;
+}
+
+.button--green {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #3b8070;
+  color: #3b8070;
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+.button--green:hover {
+  color: #fff;
+  background-color: #3b8070;
+}
+
+.button--grey {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #35495e;
+  color: #35495e;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+}
+
+.button--grey:hover {
+  color: #fff;
+  background-color: #35495e;
+}
+</style>
